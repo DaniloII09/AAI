@@ -21,7 +21,6 @@ void show_array(int* A, int n){
 */
 //Función que calcula el punto de partición en el arreglo
 int partition(int* A, int p, int r){
-    int temp; //Variable auxiliar
     //Se toma como pivote el primer dato
     int pivot = A[p];
     //Se toma como primera posición de referencia una después
@@ -30,7 +29,7 @@ int partition(int* A, int p, int r){
 
     /* Recorrido de los datos */
     //Desde la derecha del pivote y hasta la última posición
-    for(int j = p+1; j <= r; ++j)
+    for(int j = p+1; j <= r; ++j) {
         //Si el dato actual es más pequeño que el pivote,
         //se intercambia con el dato que está en la
         //posición de referencia
@@ -38,7 +37,7 @@ int partition(int* A, int p, int r){
             swap(A[i], A[j]);
             ++i; //Se desplaza la posición de referencia hacia la derecha
         }
-    
+    }
     //Se mueve el pivote a su nueva posición (a la izquierda
     //de la última posición de referencia)
     swap(A[p], A[i-1]);

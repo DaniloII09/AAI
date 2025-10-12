@@ -87,18 +87,57 @@ void merge_sort(int* A, int p, int r){
     }
 }
 
-int main(void){
-    //Arreglo de prueba
-    int size = 8, A[size] = {5,2,4,6,1,3,9,7};
+int depth = 0;
+void printIndent() { for (int i=0;i<depth;i++) cout << "  "; }
 
-    cout << "Arreglo antes de ordenar: ";
+void merge_sort_trace(int* A, int p, int r){
+    printIndent(); cout << "merge_sort("<<p<<","<<r<<")\n";
+    if (p < r) {
+        int q = (p + r) / 2; // en C++ int ya trunca (floor)
+        depth++; merge_sort_trace(A, p, q); depth--;
+        depth++; merge_sort_trace(A, q+1, r); depth--;
+        printIndent(); cout << "merge("<<p<<","<<q<<","<<r<<")\n";
+        merge(A, p, q, r);
+    }
+}
+
+
+int* random_array(int n) {
+    srand(time(0));
+
+    int* A = new int[n];
+    for (int i = 0; i < n; i++) {
+        A[i] = rand() % ((n)*5) + 1;
+    }
+
+    return A;
+}
+
+int main(void){
+    int size;
+    cout << "Ingrese la longitud del arreglo: ";
+    cin >> size;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    while(size <= 0) {
+        cout << "Ingrese una longitud valida: ";
+        cin >> size;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    int* A = random_array(size);
+
+    cout << "Arreglo antes de ordenar:";
     show_array(A,size);
 
     //Se ejecuta el ordenamiento
-    merge_sort(A,0,size-1);
+    merge_sort_trace(A,0,size-1);
+    //merge_sort(A,0,size-1);
     
-    cout << "Arreglo después de ordenar: ";
+    cout << "\nArreglo despues de ordenar: ";
     show_array(A,size);
 
+    system("pause");
     return 0;
 }

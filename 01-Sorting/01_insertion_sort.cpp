@@ -52,9 +52,38 @@ void insertion_sort(int* A, int n){
     }
 }
 
+/*
+    Función para generar arrays aleatorios
+*/
+int* random_array(int n) {
+    int* A = new int[n];
+
+    srand(time(0));
+    for (int i = 0; i < n; i++)
+    {
+        A[i] = rand() % (n*5) + 1;
+    }
+
+    return A;
+}
+
 int main(void){
-    //Arreglo de prueba
-    int size = 6, A[size] = {5,2,4,6,1,3};
+    int size;
+
+    cout << "Ingrese la longitud del arreglo: ";
+    cin >> size;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    while (size <= 0)
+    {
+        cout << "Ingrese una longitud valida de arreglo: ";
+        cin >> size;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    int* A = random_array(size);
 
     cout << "Arreglo antes de ordenar: ";
     show_array(A,size);
@@ -62,8 +91,9 @@ int main(void){
     //Se ejecuta el ordenamiento
     insertion_sort(A,size);
     
-    cout << "Arreglo después de ordenar: ";
+    cout << "Arreglo despues de ordenar: ";
     show_array(A,size);
 
+    system("pause");
     return 0;
 }

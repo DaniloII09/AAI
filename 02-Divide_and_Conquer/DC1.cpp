@@ -32,14 +32,37 @@ double power_function_DC(double a, int b){
 
     //Etapa IV: Mezclar las soluciones y retornar resultado
     //Acá es multiplicar a^{b/2} por sí mismo
-    return partial_result * partial_result;
+    return (b%2) ? a * partial_result * partial_result : partial_result * partial_result;
 }
 
 int main(){
-    double a = 45;
-    int b = 32;
-    cout << power_function(a, b) << "\n";
+    double a;
+    int b;
+
+    cout << "Ingrese el numero base: ";
+    cin >> a;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    while(isnan(a)) {
+        cout << "Ingrese un numero base valido: ";
+        cin >> a;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    cout << "Ingrese la potencia: ";
+    cin >> b;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    while(b < 0) {
+        cout << "Ingrese una potencia valida: ";
+        cin >> b;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
     cout << power_function_DC(a, b) << "\n";
+    cout << power_function(a, b) << "\n";
 
     return 0;
 }
