@@ -11,26 +11,26 @@ void show_array(int* A, int size) {
 
 int partition(int* A, int p, int r) {
   int temp = 0;
-  int pivot = A[r], i = p;
+  int pivot = A[p], i = p + 1;
 
   for (int j = p + 1; j < r; j++) {
     //Los valores menores al pivote, se mueven a la izquierda
     if (A[j] < pivot) {
-      i++;
       temp = A[j];
       A[j] = A[i];
       A[i] = temp;
+      i++;
     }
   }
 
   //El pivote queda con los valores menores a el a su izquierda y los mayores a su derecha
   //El pivote ya queda en su posición final
-  temp = A[i + 1];
-  A[i + 1] = A[r];
-  A[r] = temp;
+  temp = A[i - 1];
+  A[i - 1] = A[p];
+  A[p] = temp;
 
   //Se regresa el pivote en su nuevo sitio
-  return i + 1;
+  return i - 1;
 }
 
 void quick_sort(int* A, int p, int r) {
